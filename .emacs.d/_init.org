@@ -1,6 +1,7 @@
 #+STARTIP: overview
 ** Interface tweeks 
 #+BEGIN_SRC emacs-lisp
+(setq user-emacs-directory (file-truename "~/.emacs.d/"))
 (setq inhibit-startup-message t)
 (tool-bar-mode -1)
 (toggle-scroll-bar -1)
