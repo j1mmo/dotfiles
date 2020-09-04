@@ -4,6 +4,7 @@
 (setq user-emacs-directory (file-truename "~/.emacs.d/"))
 
 (setq inhibit-startup-message t)
+(setq visible-bell 1)
 (tool-bar-mode -1)
 (toggle-scroll-bar -1)
 (menu-bar-mode -1)
@@ -12,7 +13,6 @@
 (global-set-key (kbd "<f5>") 'revert-buffer)
 (setq org-startup-truncated nil)
 (global-visual-line-mode t)
-(setq scheme-program-name "xscheme")
 #+END_SRC
 ** Custom Keybindings
 #+BEGIN_SRC emacs-lisp
@@ -24,12 +24,16 @@
   :ensure t)
 #+END_SRC
 ** My functions
-   define the location of the init file, an open it with 
+   define the location of the init file, and a function to quickly open it. As well as a similar function to open Org directory
 #+BEGIN_SRC emacs-lisp
-(defvar config "~/.emacs.d/")
 (defun open-config ()
+  (defvar config "~/.emacs.d/")
   (interactive)
   (find-file config))
+(defun Org-dired ()
+  (defvar org "~/.org/")
+  (interactive)
+  (find-file org))
 #+END_SRC
 ** TODO: Descriptions of packages
 #+BEGIN_SRC emacs-lisp
