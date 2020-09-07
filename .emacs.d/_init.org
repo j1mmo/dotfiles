@@ -30,7 +30,7 @@
   (defvar config "~/.emacs.d/")
   (interactive)
   (find-file config))
-(defun Org-dired ()
+(defun open-org ()
   (defvar org "~/.org/")
   (interactive)
   (find-file org))
