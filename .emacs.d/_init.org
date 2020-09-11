@@ -18,34 +18,21 @@
 #+BEGIN_SRC emacs-lisp
 (global-set-key (kbd "C-x C-m") 'compile)
 #+END_SRC
-** Try
+** Org-Bullets
 #+BEGIN_SRC emacs-lisp
-(use-package try
-  :ensure t)
-#+END_SRC
-** My functions
-   define the location of the init file, and a function to quickly open it. As well as a similar function to open Org directory
-#+BEGIN_SRC emacs-lisp
-(defun open-config ()
-  (defvar config "~/.emacs.d/")
-  (interactive)
-  (find-file config))
-(defun open-org ()
-  (defvar org "~/.org/")
-  (interactive)
-  (find-file org))
-#+END_SRC
-** TODO: Descriptions of packages
-#+BEGIN_SRC emacs-lisp
-(use-package which-key
-  :ensure t
-  :config (which-key-mode))
-
 (use-package org-bullets
 :ensure t
 :config
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-
+#+END_SRC
+** Which-Key
+#+BEGIN_SRC emacs-lisp
+(use-package which-key
+  :ensure t
+  :config (which-key-mode))
+#+END_SRC 
+** Ace-Window
+#+BEGIN_SRC emacs-lisp
 (use-package ace-window
   :ensure t
   :init
@@ -55,11 +42,15 @@
      '(aw-leading-char-face
        ((t (:inherit ace-jump-face-foreground :height 3.0)))))
     ))
-
+#+END_SRC
+** Counsel
+#+BEGIN_SRC emacs-lisp
 (use-package counsel
   :ensure t
   )
-
+#+END_SRC
+** Swiper
+#+BEGIN_SRC emacs-lisp
 (use-package swiper
   :ensure try
   :config
@@ -83,23 +74,75 @@
     (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
     (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
     ))
-
+#+END_SRC
+** Avy
+#+BEGIN_SRC emacs-lisp
 (use-package avy
   :ensure t
   :bind ("M-s" . avy-goto-char))
-
+#+END_SRC
+** Colour-Themes
+#+BEGIN_SRC emacs-lisp
 (use-package alect-themes
   :ensure t
   :config (load-theme 'alect-light t))
-
+#+END_SRC
+** Centered Window
+#+BEGIN_SRC emacs-lisp
 (use-package centered-window
   :ensure t)
-
+#+END_SRC
+** Magit
+#+BEGIN_SRC emacs-lisp
 (use-package magit
   :ensure t
   :init
   (progn
   (bind-key "C-x g" 'magit-status)
   ))
+#+END_SRC
+** Auto-Complete
+   Enable auto-complete globally
+#+BEGIN_SRC emacs-lisp
+(use-package auto-complete
+  :ensure t)
 
+(global-auto-complete-mode t)
+#+END_SRC
+** Try
+#+BEGIN_SRC emacs-lisp
+(use-package try
+  :ensure t)
+#+END_SRC
+** My functions
+   define the location of the init file, and a function to quickly open it. As well as a similar function to open Org directory
+#+BEGIN_SRC emacs-lisp
+
+(defun open-config ()
+  (defvar config "~/.emacs.d/")
+  (interactive)
+  (find-file config))
+
+(defun open-org ()
+  (defvar org "~/.org/")
+  (interactive)
+  (find-file org))
+
+
+#+END_SRC
+** TODO: Descriptions of packages
+#+BEGIN_SRC emacs-lisp
+
+
+
+
+#+END_SRC
+** C++ 
+#+BEGIN_SRC emacs-lisp
+(defun my-c++-mode-hook ()
+  (setq c-basic-offset 4)
+  (c-set-offset 'substatement-open 0))
+(add-hook 'c++-mode-hook 'my-c++-mode-hook)
+
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 #+END_SRC
