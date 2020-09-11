@@ -130,13 +130,6 @@
 
 
 #+END_SRC
-** TODO: Descriptions of packages
-#+BEGIN_SRC emacs-lisp
-
-
-
-
-#+END_SRC
 ** C++ 
 #+BEGIN_SRC emacs-lisp
 (defun my-c++-mode-hook ()
