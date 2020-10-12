@@ -94,9 +94,10 @@ place on backups in one location to remove annoying files everywhere
 #+END_SRC
 ** Colour-Themes
 #+BEGIN_SRC emacs-lisp
-(use-package alect-themes
-  :ensure t
-  :config (load-theme 'alect-light t))
+(use-package modus-vivendi-theme
+  :ensure t)
+(use-package modus-operandi-theme
+  :ensure t)
 #+END_SRC
 ** Centered Window
 #+BEGIN_SRC emacs-lisp
