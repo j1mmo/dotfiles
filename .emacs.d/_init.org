@@ -13,6 +13,10 @@
 (global-set-key (kbd "<f5>") 'revert-buffer)
 (setq org-startup-truncated nil)
 (global-visual-line-mode t)
+;; turn on highlight matching brackets when cursor is on one
+(show-paren-mode 1)
+;; turn on line numbers
+(global-display-line-numbers-mode)
 
 #+END_SRC
 place on backups in one location to remove annoying files everywhere
