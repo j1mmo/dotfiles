@@ -143,8 +143,6 @@ place on backups in one location to remove annoying files everywhere
   (defvar org "~/.org/")
   (interactive)
   (find-file org))
-
-
 #+END_SRC
 ** C++ 
 #+BEGIN_SRC emacs-lisp
