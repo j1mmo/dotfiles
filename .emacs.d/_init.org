@@ -98,9 +98,9 @@ place on backups in one location to remove annoying files everywhere
 #+END_SRC
 ** Colour-Themes
 #+BEGIN_SRC emacs-lisp
-(use-package modus-vivendi-theme
-  :ensure t)
 (use-package modus-operandi-theme
+  :ensure t)
+(use-package modus-vivendi-theme
   :ensure t)
 #+END_SRC
 ** Centered Window
@@ -117,14 +117,6 @@ place on backups in one location to remove annoying files everywhere
   (bind-key "C-x g" 'magit-status)
   ))
 #+END_SRC
-** Auto-Complete
-   Enable auto-complete globally
-#+BEGIN_SRC emacs-lisp
-(use-package auto-complete
-  :ensure t)
-
-(global-auto-complete-mode t)
-#+END_SRC
 ** Try
 #+BEGIN_SRC emacs-lisp
 (use-package try
@@ -135,7 +127,7 @@ place on backups in one location to remove annoying files everywhere
 #+BEGIN_SRC emacs-lisp
 
 (defun open-config ()
-  (defvar config "~/.emacs.d/")
+  (defvar config "~/.emacs.d/_init.org")
   (interactive)
   (find-file config))
 
