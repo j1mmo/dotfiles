@@ -1,5 +1,5 @@
 #+STARTIP: overview
-** Interface tweeks 
+* Interface tweeks 
 #+BEGIN_SRC emacs-lisp
 (setq user-emacs-directory (file-truename "~/.emacs.d/"))
 
@@ -17,7 +17,9 @@
 (show-paren-mode 1)
 ;; turn on line numbers
 (global-display-line-numbers-mode)
-
+;; prefer vertical split
+(setq split-height-threshold nil)
+(setq split-width-threshold most-positive-fixnum)
 #+END_SRC
 place on backups in one location to remove annoying files everywhere
 #+BEGIN_SRC emacs-lisp
@@ -98,9 +100,7 @@ place on backups in one location to remove annoying files everywhere
 #+END_SRC
 ** Colour-Themes
 #+BEGIN_SRC emacs-lisp
-(use-package modus-operandi-theme
-  :ensure t)
-(use-package modus-vivendi-theme
+(use-package zenburn-theme
   :ensure t)
 #+END_SRC
 ** Magit
@@ -145,4 +145,9 @@ place on backups in one location to remove annoying files everywhere
 (use-package haskell-mode
   :ensure t)
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+#+END_SRC
+** Zig
+#+BEGIN_SRC emacs-lisp
+(use-package zig-mode
+  :ensure t)
 #+END_SRC
