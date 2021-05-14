@@ -124,20 +124,6 @@ place on backups in one location to remove annoying files everywhere
 (use-package try
   :ensure t)
 #+END_SRC
-** My functions
-   define the location of the init file, and a function to quickly open it. As well as a similar function to open Org directory
-#+BEGIN_SRC emacs-lisp
-
-(defun open-config ()
-  (defvar config "~/.emacs.d/_init.org")
-  (interactive)
-  (find-file config))
-
-(defun open-org ()
-  (defvar org "~/.org/")
-  (interactive)
-  (find-file org))
-#+END_SRC
 ** C++ 
 #+BEGIN_SRC emacs-lisp
 (defun my-c++-mode-hook ()
@@ -182,4 +168,22 @@ place on backups in one location to remove annoying files everywhere
   (define-key haskell-cabal-mode-map (kbd "C-c C-k") 'haskell-interactive-mode-clear)
   (define-key haskell-cabal-mode-map (kbd "C-c C-c") 'haskell-process-cabal-build)
   (define-key haskell-cabal-mode-map (kbd "C-c c") 'haskell-process-cabal)))
+#+END_SRC
+** D
+#+begin_src emacs-lisp
+(use-package d-mode
+  :ensure t)
+#+end_src
+** My functions
+   define the location of the init file, and a function to quickly open it. As well as a similar function to open Org directory
+#+BEGIN_SRC emacs-lisp
+(defun open-config ()
+  (defvar config "~/.emacs.d/_init.org")
+  (interactive)
+  (find-file config))
+
+(defun open-org ()
+  (defvar org "~/.org/")
+  (interactive)
+  (find-file org))
 #+END_SRC
