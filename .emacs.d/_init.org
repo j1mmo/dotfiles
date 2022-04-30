@@ -20,8 +20,12 @@
 ;; prefer vertical split
 (setq split-height-threshold nil)
 (setq split-width-threshold most-positive-fixnum)
+;; max screen size on startup
+(add-hook 'window-setup-hook 'toggle-frame-maximized t)
 #+END_SRC
 place on backups in one location to remove annoying files everywhere
+(setq backup-directory-alist `(("." . "~/emacs.d/.saves")))
+
 #+BEGIN_SRC emacs-lisp
 (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
   backup-by-copying t    ; Don't delink hardlinks
@@ -119,17 +123,134 @@ place on backups in one location to remove annoying files everywhere
   (bind-key "C-x g" 'magit-status)
   ))
 #+END_SRC
+** Aggressive Indent
+#+BEGIN_SRC emacs-lisp
+(use-package aggressive-indent
+  :ensure t)
+(add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
+(add-hook 'css-mode-hook #'aggressive-indent-mode)
+#+END_SRC
 ** Try
 #+BEGIN_SRC emacs-lisp
 (use-package try
   :ensure t)
-#+END_SRC
-** C++ 
+  #+END_SRC
+** Projectile
 #+BEGIN_SRC emacs-lisp
-(defun my-c++-mode-hook ()
-  (setq c-basic-offset 4)
-  (c-set-offset 'substatement-open 0))
-(add-hook 'c++-mode-hook 'my-c++-mode-hook)
+(use-package projectile
+  :ensure t)
+(projectile-mode +1)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+#+END_SRC
+** Common Lisp
+#+BEGIN_SRC emacs-lisp
+(use-package sly
+  :ensure t)
+(use-package lispy
+  :ensure t)
+(use-package adjust-parens
+  :ensure t)
+(use-package easy-escape
+  :ensure t)
+(use-package paredit
+  :ensure t)
+
+(add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
+(add-hook 'lisp-mode-hook 'easy-escape-minor-mode)
+(add-hook 'emacs-lisp-mode-hook 'easy-escape-minor-mode)
+(add-hook 'lisp-mode-hook 'enable-paredit-mode)
+#+END_SRC 
+** C-family
+#+BEGIN_SRC emacs-lisp
+(c-add-style "JIMBO-STYLE"
+	     '("gnu"
+	       (c-basic-offset . 2)	; Guessed value
+	       (c-offsets-alist
+		(arglist-cont . 0)	; Guessed value
+		(block-close . 0)	; Guessed value
+		(brace-entry-open . 0)	; Guessed value
+		(brace-list-close . 0)	; Guessed value
+		(brace-list-entry . 0)	; Guessed value
+		(brace-list-intro . +)	; Guessed value
+		(case-label . 0)	; Guessed value
+		(defun-block-intro . +)	; Guessed value
+		(defun-close . 0)	; Guessed value
+		(defun-open . 0)	; Guessed value
+		(statement . 0)		     ; Guessed value
+		(statement-block-intro . ++) ; Guessed value
+		(substatement-open . +)	; Guessed value
+		(topmost-intro . 0)	; Guessed value
+		(access-label . -)
+		(annotation-top-cont . 0)
+		(annotation-var-cont . +)
+		(arglist-close . c-lineup-close-paren)
+		(arglist-cont-nonempty . c-lineup-arglist)
+		(arglist-intro . c-lineup-arglist-intro-after-paren)
+		(block-open . 0)
+		(brace-list-open . +)
+		(c . c-lineup-C-comments)
+		(catch-clause . 0)
+		(class-close . 0)
+		(class-open . 0)
+		(comment-intro . c-lineup-comment)
+		(composition-close . 0)
+		(composition-open . 0)
+		(cpp-define-intro c-lineup-cpp-define +)
+		(cpp-macro . -1000)
+		(cpp-macro-cont . +)
+		(do-while-closure . 0)
+		(else-clause . 0)
+		(extern-lang-close . 0)
+		(extern-lang-open . 0)
+		(friend . 0)
+		(func-decl-cont . +)
+		(inclass . +)
+		(incomposition . +)
+		(inexpr-class . +)
+		(inexpr-statement . +)
+		(inextern-lang . +)
+		(inher-cont . c-lineup-multi-inher)
+		(inher-intro . +)
+		(inlambda . 0)
+		(inline-close . 0)
+		(inline-open . 0)
+		(inmodule . +)
+		(innamespace . +)
+		(knr-argdecl . 0)
+		(knr-argdecl-intro . 5)
+		(label . 0)
+		(lambda-intro-cont . +)
+		(member-init-cont . c-lineup-multi-inher)
+		(member-init-intro . +)
+		(module-close . 0)
+		(module-open . 0)
+		(namespace-close . 0)
+		(namespace-open . 0)
+		(objc-method-args-cont . c-lineup-ObjC-method-args)
+		(objc-method-call-cont 
+                 c-lineup-ObjC-method-call-colons 
+                 c-lineup-ObjC-method-call +)
+		(objc-method-intro .
+				   [0])
+		(statement-case-intro . +)
+		(statement-case-open . +)
+		(statement-cont . +)
+		(stream-op . c-lineup-streamop)
+		(string . -1000)
+		(substatement . +)
+		(substatement-label . 0)
+		(template-args-cont c-lineup-template-args +)
+		(topmost-intro-cont first 
+                 c-lineup-topmost-intro-cont 
+                 c-lineup-gnu-DEFUN-intro-cont))))
+
+
+(defun my-c-mode-common-hook ()
+;;  (no-case-fold-search t)
+  (c-set-style "JIMBO-STYLE")
+  (c-toggle-auto-newline 1))
+
+(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
@@ -186,4 +307,9 @@ place on backups in one location to remove annoying files everywhere
   (defvar org "~/.org/")
   (interactive)
   (find-file org))
+
+(defun revert-buffer-no-confirm ()
+    "Revert buffer without confirmation."
+    (interactive)
+    (revert-buffer :ignore-auto :noconfirm))
 #+END_SRC
